@@ -28,7 +28,11 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
     
 ## Installing OpenShift Container Storage
 
-The following commands must be issued by an OpenShift user with a *cluster-admin* role.
+The commands in this section must be issued by an OpenShift user with a *cluster-admin* role.
+
+### Installing ocs-operator
+
+Review the [ocs-operator/base](ocs-operator/base) kustomization and modify it to suit your needs. Notably, set the version of the ocs-operator you want to deploy in [ocs-operator/base/openshift-storage-subscription.yaml](ocs-operator/base/openshift-storage-subscription.yaml).
 
 To deploy an ocs-operator, issue the command:
 ```
@@ -42,3 +46,5 @@ awss3operator.1.0.1   AWS S3 Operator               1.0.1     awss3operator.1.0.
 ocs-operator.v4.2.1   OpenShift Container Storage   4.2.1                           Succeeded
 ```
 All csvs must reach the phase `Succeeded`. Note that you must wait until the csvs are fully deployed before creating an OCS instance!
+
+### Installing OCS instance
