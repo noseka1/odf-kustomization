@@ -19,7 +19,7 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
   * On AWS, the default storage class must be `gp2`.
   * On VMware vSphere, the default storage class must be `thin`.
   
-  For example, on AWS the you can verify the default storage class setting with:
+  For example, on AWS you can verify the default storage class setting with:
   ```
   $ oc get storageclass
   NAME            PROVISIONER             AGE
