@@ -34,7 +34,7 @@ To deploy an ocs-operator, issue the command:
 ```
 $ oc apply --kustomize ocs-operator/base
 ```
-Wait until the ocs-operator csvs are fully deployed. You can watch the deployment status with:
+Wait until the ocs-operator csvs are fully deployed. You can watch their deployment status with:
 ```
 $ oc get csv --namespace openshift-storage
 NAME                  DISPLAY                       VERSION   REPLACES              PHASE
