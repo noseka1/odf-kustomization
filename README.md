@@ -69,3 +69,5 @@ When the OCS instance deployment is complete, the status of the `Available` cond
 $ oc get storagecluster --namespace openshift-storage --output jsonpath='{.items[0].status.conditions[?(@.type=="Available")].status}' 
 True
 ```
+
+Congrats on completing the installation of OpenShift Container Storage. Enjoy!
