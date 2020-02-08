@@ -11,6 +11,7 @@ This kustomization makes use of [ocs-operator](https://github.com/openshift/ocs-
     `oc label nodes <node> cluster.ocs.openshift.io/openshift-storage=`    
   * To verify labeling, you can list the OCS worker nodes with:  
     `oc get node --selector cluster.ocs.openshift.io/openshift-storage=`
+    
     You should see at least three nodes listed in the output.
     
 ## Installing OpenShift Container Storage
