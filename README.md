@@ -48,3 +48,24 @@ ocs-operator.v4.2.1   OpenShift Container Storage   4.2.1                       
 All csvs must reach the phase `Succeeded`. Note that you must wait until the csvs are fully deployed before creating an OCS instance!
 
 ### Installing OCS instance
+
+Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the [ocs-instance/base/ocs-storagecluster-storagecluster.yaml](ocs-instance/base/ocs-storagecluster-storagecluster.yaml) manifests is appropriate storage class for your infrastructure provider.
+
+To deploy an OCS instance, issue the command:
+
+```
+$ oc apply --kustomize ocs-instance/base
+```
+
+Watch the status conditions of the storagecluster resource while the OCS instance is being deployed:
+
+```
+$ oc get storagecluster --namespace openshift-storage --output yaml
+```
+
+When the OCS instance deployment is complete, the status of the `Available` condition changes to `True` like this:
+
+```
+$ oc get storagecluster --namespace openshift-storage --output jsonpath='{.items[0].status.conditions[?(@.type=="Available")].status}' 
+True
+```
