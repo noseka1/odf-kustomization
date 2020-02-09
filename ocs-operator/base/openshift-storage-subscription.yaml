@@ -5,6 +5,7 @@ metadata:
   namespace: openshift-storage
 spec:
   channel: stable-4.2
+  installPlanApproval: Automatic
   name: ocs-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
