@@ -9,12 +9,19 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
 * OpenShift cluster with a minimum of 3 OCS worker nodes.
 * Each worker node needs to have a minimum of 16 CPUs and 64 GB memory available.
 * Worker nodes must be labeled with a label `cluster.ocs.openshift.io/openshift-storage=`
-  * To label a node, issue the command:  
-    `$ oc label nodes <node> cluster.ocs.openshift.io/openshift-storage=`    
-  * To verify labeling, you can list the OCS worker nodes with:  
-    `$ oc get node --selector cluster.ocs.openshift.io/openshift-storage=`
-    
+  * To label a node, issue the command:
+    ```
+    $ oc label nodes <node> cluster.ocs.openshift.io/openshift-storage=
+    ```
+  * To verify labeling, you can list the OCS worker nodes with:
+    ```
+    $ oc get node --selector cluster.ocs.openshift.io/openshift-storage=
+    ```
     You should see at least three nodes listed in the output.
+* It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
+  ```
+  $ oc adm taint nodes <node names> node.ocs.openshift.io/storage=true:NoSchedule
+  ```
 * The default storage class is set to the appropriate storage class for your infrastructure provider.
   * On AWS, the default storage class must be `gp2`.
   * On VMware vSphere, the default storage class must be `thin`.
