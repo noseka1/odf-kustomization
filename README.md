@@ -30,7 +30,9 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
     ```
   * Configure the OpenShift scheduler to place workloads on regular worker nodes by default and not on OCS worker nodes:
     ```
-    $ oc patch schedulers.config.openshift.io cluster --type merge --patch '{"spec":{"defaultNodeSelector": "node-role.kubernetes.io/worker="}}'
+    $ oc patch schedulers.config.openshift.io cluster \
+      --type merge \
+      --patch '{"spec":{"defaultNodeSelector": "node-role.kubernetes.io/worker="}}'
     ```
 
 * See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before you choose to follow this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
