@@ -18,7 +18,22 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
     $ oc get node --selector cluster.ocs.openshift.io/openshift-storage=
     ```
     You should see at least three nodes listed in the output.
-* See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before following this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
+* If you plan to use the OCS worker nodes exlusively for OCS services, you can avoid double charges of both OpenShift and OpenShift Container Storage for OCS worker nodes, see also [here](https://access.redhat.com/solutions/4827161) . In order to achieve that you must set the role of OCS worker nodes to `infra`:
+
+  * To add the infra role to OCS worker nodes, issue the command:
+    ```
+    $ oc label nodes <node> node-role.kubernetes.io/infra=
+    ```
+  * To remove the default `worker` role from OCS worker nodes, issue the command:
+    ```
+    $ oc label nodes <node> node-role.kubernetes.io/worker-
+    ```
+  * To schedule workloads on regular worker nodes on not OCS worker nodes:
+    ```
+    $ oc patch schedulers.config.openshift.io cluster --type merge --patch '{"spec":{"defaultNodeSelector": "node-role.kubernetes.io/worker="}}'
+    ```
+
+* See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before you choose to follow this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
   ```
   $ oc adm taint nodes <node names> node.ocs.openshift.io/storage=true:NoSchedule
   ```
