@@ -18,15 +18,16 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
     $ oc get node --selector cluster.ocs.openshift.io/openshift-storage=
     ```
     You should see at least three nodes listed in the output.
+
 * If you plan to use the OCS worker nodes exlusively for OCS services, you can avoid double charges of both OpenShift and OpenShift Container Storage for OCS worker nodes, see also [here](https://access.redhat.com/solutions/4827161) . In order to achieve that you must set the role of OCS worker nodes to `infra`:
 
-  * To add the infra role to OCS worker nodes, issue the command:
-    ```
-    $ oc label nodes <node> node-role.kubernetes.io/infra=
-    ```
   * To remove the default `worker` role from OCS worker nodes, issue the command:
     ```
     $ oc label nodes <node> node-role.kubernetes.io/worker-
+    ```
+  * To add the infra role to OCS worker nodes, issue the command:
+    ```
+    $ oc label nodes <node> node-role.kubernetes.io/infra=
     ```
   * Configure the OpenShift scheduler to place workloads on regular worker nodes by default and not on OCS worker nodes:
     ```
