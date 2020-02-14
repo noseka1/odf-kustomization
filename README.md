@@ -78,5 +78,8 @@ $ oc get storagecluster \
   --output jsonpath='{.items[0].status.conditions[?(@.type=="Available")].status}' 
 True
 ```
+Congrats on completing the installation of OpenShift Container Storage!
 
-Congrats on completing the installation of OpenShift Container Storage. To exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
+## Exercising the OCS cluster
+
+To exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
