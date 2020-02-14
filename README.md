@@ -79,4 +79,4 @@ $ oc get storagecluster \
 True
 ```
 
-Congrats on completing the installation of OpenShift Container Storage. Enjoy!
+Congrats on completing the installation of OpenShift Container Storage. To exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
