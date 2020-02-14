@@ -18,7 +18,7 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
     $ oc get node --selector cluster.ocs.openshift.io/openshift-storage=
     ```
     You should see at least three nodes listed in the output.
-* It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
+* See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before following this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
   ```
   $ oc adm taint nodes <node names> node.ocs.openshift.io/storage=true:NoSchedule
   ```
