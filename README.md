@@ -98,6 +98,14 @@ True
 ```
 Congrats on completing the installation of OpenShift Container Storage!
 
+### Deploying rook-ceph-tools
+
+Optionally, you can deploy a Ceph toolbox:
+
+```
+$ oc apply --kustomize rook-ceph-tools/base
+```
+
 ## Exercising the OCS cluster
 
 To exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
