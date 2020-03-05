@@ -123,4 +123,18 @@ $ oc apply --kustomize rook-ceph-tools/base
 
 ## Exercising the OCS cluster
 
-To exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
+You can create test volumes by issuing the commands:
+
+```
+$ oc apply -f docs/samples/test-rwo-pvc.yaml
+```
+
+```
+$ oc apply -f docs/samples/test-rwx-pvc.yaml
+```
+
+```
+$ oc apply -f docs/samples/test-bucket-obc.yaml
+```
+
+To further exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
