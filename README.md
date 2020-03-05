@@ -98,6 +98,21 @@ True
 ```
 Congrats on completing the installation of OpenShift Container Storage!
 
+### Changing the default StorageClass to OCS
+
+Mark the current StorageClass as non-default:
+
+```
+$ oc patch storageclass gp2 \
+    -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class": "false"}}}'
+```
+Configure ceph rbd as your default StorageClass:
+
+```
+$ oc patch storageclass ocs-storagecluster-ceph-rbd \
+    -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class": "true"}}}'
+```
+
 ### Deploying rook-ceph-tools
 
 Optionally, you can deploy a Ceph toolbox:
