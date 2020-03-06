@@ -98,6 +98,21 @@ True
 ```
 Congrats on completing the installation of OpenShift Container Storage!
 
+### Changing the default StorageClass to OCS
+
+Mark the current StorageClass as non-default:
+
+```
+$ oc patch storageclass gp2 \
+    -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class": "false"}}}'
+```
+Configure ceph rbd as your default StorageClass:
+
+```
+$ oc patch storageclass ocs-storagecluster-ceph-rbd \
+    -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class": "true"}}}'
+```
+
 ### Deploying rook-ceph-tools
 
 Optionally, you can deploy a Ceph toolbox:
@@ -108,4 +123,18 @@ $ oc apply --kustomize rook-ceph-tools/base
 
 ## Exercising the OCS cluster
 
-To exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
+You can create test volumes by issuing the commands:
+
+```
+$ oc apply -f docs/samples/test-rwo-pvc.yaml
+```
+
+```
+$ oc apply -f docs/samples/test-rwx-pvc.yaml
+```
+
+```
+$ oc apply -f docs/samples/test-bucket-obc.yaml
+```
+
+To further exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
