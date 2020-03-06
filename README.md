@@ -138,3 +138,17 @@ $ oc apply -f docs/samples/test-bucket-obc.yaml
 ```
 
 To further exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
+
+## Troubleshooting
+
+Collect debugging data about the currently running Openshift cluster:
+
+```
+$ oc adm must-gather
+```
+
+Collect debugging information specific to OpenShift Container Storage:
+
+```
+$ oc adm must-gather --image=quay.io/rhceph-dev/ocs-must-gather:latest-4.2
+```
