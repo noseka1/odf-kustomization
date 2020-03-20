@@ -4,6 +4,10 @@ This kustomization makes use of [ocs-operator](https://github.com/openshift/ocs-
 
 Red Hat OpenShift Container Storage product documentation can be found [here](https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage).
 
+This kustomization was tested on:
+* VMware vSphere
+* Amazon AWS
+
 ## Prerequisites
 
 * OpenShift cluster with a minimum of 3 OCS worker nodes.
@@ -65,7 +69,7 @@ All csvs must reach the phase `Succeeded`. Note that you must wait until the csv
 
 ### Creating OCS instance
 
-Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the [ocs-instance/base/ocs-storagecluster-storagecluster.yaml](ocs-instance/base/ocs-storagecluster-storagecluster.yaml) manifests is appropriate storage class for your infrastructure provider.
+Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the [ocs-instance/base/ocs-storagecluster-storagecluster.yaml](ocs-instance/base/ocs-storagecluster-storagecluster.yaml) manifests is appropriate storage class for your infrastructure provider (use `gp2` for AWS, `thin` for vSphere).
 
 To deploy an OCS instance, issue the command:
 
