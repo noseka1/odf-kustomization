@@ -4,9 +4,9 @@ metadata:
   name: ocs-storagecluster
   namespace: openshift-storage
 spec:
-  manageNodes: false
   storageDeviceSets:
-  - count: 1
+  - config: {}
+    count: 1
     dataPVCTemplate:
       spec:
         accessModes:

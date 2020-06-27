@@ -4,6 +4,10 @@ This kustomization makes use of [ocs-operator](https://github.com/openshift/ocs-
 
 Red Hat OpenShift Container Storage product documentation can be found [here](https://access.redhat.com/documentation/en-us/red_hat_openshift_container_storage).
 
+This kustomization was tested on:
+* VMware vSphere
+* Amazon AWS
+
 ## Prerequisites
 
 * OpenShift cluster with a minimum of 3 OCS worker nodes.
@@ -19,22 +23,13 @@ Red Hat OpenShift Container Storage product documentation can be found [here](ht
     ```
     You should see at least three nodes listed in the output.
 
-* If you plan to use the OCS worker nodes exlusively for OCS services, you can avoid double charges of both OpenShift and OpenShift Container Storage for OCS worker nodes, see also [here](https://access.redhat.com/solutions/4827161) . In order to achieve that you must set the role of OCS worker nodes to `infra`:
+* If you plan to use the OCS worker nodes exlusively for OCS services, you can avoid double charges of both OpenShift and OpenShift Container Storage for OCS worker nodes, see also [here](https://access.redhat.com/solutions/4827161). Refer to the following documentation on how to create infra nodes in your OpenShift cluster:
 
-  * To remove the default `worker` role from OCS worker nodes, issue the command:
-    ```
-    $ oc label nodes <node> node-role.kubernetes.io/worker-
-    ```
-  * To add the infra role to OCS worker nodes, issue the command:
-    ```
-    $ oc label nodes <node> node-role.kubernetes.io/infra=
-    ```
-  * Configure the OpenShift scheduler to place workloads on regular worker nodes by default and not on OCS worker nodes:
-    ```
-    $ oc patch schedulers.config.openshift.io cluster \
-      --type merge \
-      --patch '{"spec":{"defaultNodeSelector": "node-role.kubernetes.io/worker="}}'
-    ```
+  * [Creating an Infra Node in OpenShift v4](https://access.redhat.com/solutions/4287111)
+  * [Openshift 4 create infra machines ](https://access.redhat.com/solutions/4342791)
+  * [Custom pools](https://github.com/openshift/machine-config-operator/blob/master/docs/custom-pools.md)
+  
+  The creation of infra nodes has also been implemented by the [openshift-post-install](https://github.com/noseka1/openshift-post-install) project.
 
 * See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before you choose to follow this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
   ```
@@ -74,7 +69,7 @@ All csvs must reach the phase `Succeeded`. Note that you must wait until the csv
 
 ### Creating OCS instance
 
-Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the [ocs-instance/base/ocs-storagecluster-storagecluster.yaml](ocs-instance/base/ocs-storagecluster-storagecluster.yaml) manifests is appropriate storage class for your infrastructure provider.
+Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the [ocs-instance/base/ocs-storagecluster-storagecluster.yaml](ocs-instance/base/ocs-storagecluster-storagecluster.yaml) manifests is appropriate storage class for your infrastructure provider (use `gp2` for AWS, `thin` for vSphere).
 
 To deploy an OCS instance, issue the command:
 
@@ -138,3 +133,17 @@ $ oc apply -f docs/samples/test-bucket-obc.yaml
 ```
 
 To further exercise the OCS cluster, you can follow the [OCS-training](https://github.com/red-hat-storage/ocs-training) hands-on workshop.
+
+## Troubleshooting
+
+Collect debugging data about the currently running Openshift cluster:
+
+```
+$ oc adm must-gather
+```
+
+Collect debugging information specific to OpenShift Container Storage:
+
+```
+$ oc adm must-gather --image quay.io/rhceph-dev/ocs-must-gather:latest-4.2
+```
