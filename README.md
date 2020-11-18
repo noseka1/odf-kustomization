@@ -31,7 +31,7 @@ This kustomization was tested on:
   
   The creation of infra nodes has also been implemented by the [openshift-post-install](https://github.com/noseka1/openshift-post-install) project.
 
-* See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before you choose to follow this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
+* It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
   ```
   $ oc adm taint nodes <node names> node.ocs.openshift.io/storage=true:NoSchedule
   ```
