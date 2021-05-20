@@ -1,14 +1,20 @@
 # Deployment Options
 
-Master = OpenShift control plane
+Node roles:
 
-Infra = OpenShift router, logging, monitoring, and integrated image registry
+* Master = OpenShift control plane
+* Infra = OpenShift router, logging, monitoring, and integrated image registry
+* App = Application node
+* OCS = Ceph control plane + data plane
 
-App = Application node
+## Simple Deployment
 
-OCS = Ceph control plane + data plane
+![Deployment Diagram](ocs_on_vsphere_simple_deployment.svg.svg "Deployment Diagram")
 
-![Deployment Diagram](ocs_on_vsphere.svg "Deployment Diagram")
+## Optimized Deployment
 
-# Node Sizing
+![Deployment Diagram](ocs_on_vsphere_optimized_deployment.svg.svg "Deployment Diagram")
 
+## Scaled-out Deployment
+
+![Deployment Diagram](ocs_on_vsphere_scale_out_deployment.svg.svg "Deployment Diagram")
