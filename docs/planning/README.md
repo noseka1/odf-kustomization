@@ -1,7 +1,6 @@
 # Deployment Options
 
 Node roles:
-
 * Helper Host = Linux host used to run the OCP installer
 * Bootstrap = ephemeral node needed for installation only
 * Master = OpenShift control plane
@@ -23,7 +22,7 @@ Node roles:
 
 # Node Sizing
 
- Role | Count | vCPUs | Memory (GB)| Storage (GB)
+ Node Role | Count | vCPUs | Memory (GB)| Storage (GB)
 --------- | ----- | ---- | ------ | -------
 Helper Host | 1 | 2 | 8 | 40
 Bootstrap | 1 | 4 | 16 | 120
