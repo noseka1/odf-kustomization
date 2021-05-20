@@ -113,7 +113,27 @@ $ oc patch storageclass ocs-storagecluster-ceph-rbd \
 Optionally, you can deploy a Ceph toolbox:
 
 ```
-$ oc apply --kustomize rook-ceph-tools/base
+$ oc patch \
+    --namespace openshift-storage \
+    --type json \
+    --patch  '[{ "op": "replace", "path": "/spec/enableCephTools", "value": true }]' \
+    OCSInitialization ocsinit
+```
+
+Obtain the rook-ceph-tools pod:
+
+```
+$ TOOLS_POD=$(oc get pods --namespace openshift-storage --selector app=rook-ceph-tools --output name)
+```
+
+Run Ceph commands:
+
+```
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph status
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph osd status
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph osd tree
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph df
+$ oc rsh --namespace openshift-storage $TOOLS_POD rados df
 ```
 
 ## Exercising the OCS cluster
