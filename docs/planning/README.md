@@ -9,12 +9,12 @@ Node roles:
 
 ## Simple Deployment
 
-![Deployment Diagram](ocs_on_vsphere_simple_deployment.svg.svg "Deployment Diagram")
+![Deployment Diagram](ocs_on_vsphere_simple_deployment.svg "Deployment Diagram")
 
 ## Optimized Deployment
 
-![Deployment Diagram](ocs_on_vsphere_optimized_deployment.svg.svg "Deployment Diagram")
+![Deployment Diagram](ocs_on_vsphere_optimized_deployment.svg "Deployment Diagram")
 
 ## Scaled-out Deployment
 
-![Deployment Diagram](ocs_on_vsphere_scale_out_deployment.svg.svg "Deployment Diagram")
+![Deployment Diagram](ocs_on_vsphere_scale_out_deployment.svg "Deployment Diagram")
