@@ -165,5 +165,5 @@ $ oc adm must-gather
 Collect debugging information specific to OpenShift Container Storage:
 
 ```
-$ oc adm must-gather --image quay.io/rhceph-dev/ocs-must-gather:latest-4.2
+$ oc adm must-gather --image quay.io/rhceph-dev/ocs-must-gather:latest-4.7
 ```
