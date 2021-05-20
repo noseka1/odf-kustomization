@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ocs-operator-subscription.yaml
-- openshift-storage-namespace.yaml
+- ocs-operator-sub.yaml
+- openshift-storage-ns.yaml
 - openshift-storage-operatorgroup.yaml

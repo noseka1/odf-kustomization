@@ -31,7 +31,7 @@ This kustomization was tested on:
   
   The creation of infra nodes has also been implemented by the [openshift-post-install](https://github.com/noseka1/openshift-post-install) project.
 
-* See [BZ #1801008](https://bugzilla.redhat.com/show_bug.cgi?id=1801008) before you choose to follow this advice: It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
+* It is recommended that you apply a taint to the nodes to mark them for exclusive OpenShift Container Storage use:
   ```
   $ oc adm taint nodes <node names> node.ocs.openshift.io/storage=true:NoSchedule
   ```
@@ -113,7 +113,27 @@ $ oc patch storageclass ocs-storagecluster-ceph-rbd \
 Optionally, you can deploy a Ceph toolbox:
 
 ```
-$ oc apply --kustomize rook-ceph-tools/base
+$ oc patch \
+    --namespace openshift-storage \
+    --type json \
+    --patch  '[{ "op": "replace", "path": "/spec/enableCephTools", "value": true }]' \
+    OCSInitialization ocsinit
+```
+
+Obtain the rook-ceph-tools pod:
+
+```
+$ TOOLS_POD=$(oc get pods --namespace openshift-storage --selector app=rook-ceph-tools --output name)
+```
+
+Run Ceph commands:
+
+```
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph status
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph osd status
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph osd tree
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph df
+$ oc rsh --namespace openshift-storage $TOOLS_POD rados df
 ```
 
 ## Exercising the OCS cluster
@@ -145,5 +165,5 @@ $ oc adm must-gather
 Collect debugging information specific to OpenShift Container Storage:
 
 ```
-$ oc adm must-gather --image quay.io/rhceph-dev/ocs-must-gather:latest-4.2
+$ oc adm must-gather --image quay.io/rhceph-dev/ocs-must-gather:latest-4.7
 ```

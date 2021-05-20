@@ -4,6 +4,8 @@ metadata:
   name: ocs-storagecluster
   namespace: openshift-storage
 spec:
+  encryption:
+    enable: false
   storageDeviceSets:
   - config: {}
     count: 1
