@@ -17,4 +17,4 @@ Node roles:
 
 ## Scaled-out Deployment
 
-![Deployment Diagram](ocs_on_vsphere_scale_out_deployment.svg "Deployment Diagram")
+![Deployment Diagram](ocs_on_vsphere_scaled_out_deployment.svg "Deployment Diagram")
