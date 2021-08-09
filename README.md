@@ -69,12 +69,18 @@ All csvs must reach the phase `Succeeded`. Note that you must wait until the csv
 
 ### Creating OCS instance
 
-Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the [ocs-instance/base/ocs-storagecluster-storagecluster.yaml](ocs-instance/base/ocs-storagecluster-storagecluster.yaml) manifests is appropriate storage class for your infrastructure provider (use `gp2` for AWS, `thin` for vSphere).
+Review the [ocs-instance/base](ocs-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the *ocs-storagecluster-storagecluster.yaml* manifests is appropriate storage class for your infrastructure provider (use `gp2` for AWS, `thin` for vSphere).
 
-To deploy an OCS instance, issue the command:
+To deploy an OCS instance on AWS, issue the command:
 
 ```
-$ oc apply --kustomize ocs-instance/base
+$ oc apply --kustomize ocs-instance/overlays/aws
+```
+
+To deploy an OCS instance on vSphere, issue the command:
+
+```
+$ oc apply --kustomize ocs-instance/overlays/vsphere
 ```
 
 Watch the status conditions of the storagecluster resource while the OCS instance is being deployed:
