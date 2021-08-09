@@ -13,7 +13,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 2Ti
+            storage: 30Gi
         storageClassName: openebs-lvm
         volumeMode: Block
     name: ocs-deviceset
