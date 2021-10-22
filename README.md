@@ -144,7 +144,6 @@ $ oc rsh --namespace openshift-storage $TOOLS_POD rados df
 
 ### Accessing Ceph dashboard
 
-
 Enable dashboard (remember to set the TOOLS_POD variable as shown above before running this command):
 
 ```
