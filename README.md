@@ -142,6 +142,29 @@ $ oc rsh --namespace openshift-storage $TOOLS_POD ceph df
 $ oc rsh --namespace openshift-storage $TOOLS_POD rados df
 ```
 
+### Accessing Ceph dashboard
+
+
+Enable dashboard (remember to set the TOOLS_POD variable as shown above before running this command):
+
+```
+$ oc rsh --namespace openshift-storage $TOOLS_POD ceph mgr module enable dashboard
+```
+
+Create user admin with the role administrator. Replace <password> with your own admin password:
+
+```
+$ echo <password> | oc rsh --namespace openshift-storage $TOOLS_POD ceph dashboard ac-user-create admin administrator -i -
+```
+
+Forward local port 8443 to the dashboard endpoint:
+
+```
+$ oc port-forward deploy/rook-ceph-mgr-a 8443
+```
+
+Browse to https://localhost:8443 to access the dashboard.
+
 ## Exercising the OCS cluster
 
 You can create test volumes by issuing the commands:
