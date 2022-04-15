@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
 - odf-operator-sub.yaml
+- odf-lvm-operator-sub.yaml
 - openshift-storage-ns.yaml
 - openshift-storage-og.yaml
