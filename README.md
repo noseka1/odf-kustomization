@@ -36,14 +36,15 @@ This kustomization was tested on:
   $ oc adm taint nodes <node names> node.ocs.openshift.io/storage=true:NoSchedule
   ```
 * The default storage class is set to the appropriate storage class for your infrastructure provider.
-  * On AWS, the default storage class must be `gp2`.
+  * On AWS, the default storage class must be `gp3-csi`.
   * On VMware vSphere, the default storage class must be `thin`.
   
   For example, on AWS you can verify the default storage class setting with:
   ```
   $ oc get storageclass
-  NAME            PROVISIONER             AGE
-  gp2 (default)   kubernetes.io/aws-ebs   27m
+  NAME                PROVISIONER       RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+  gp2-csi             ebs.csi.aws.com   Delete          WaitForFirstConsumer   true                   20h
+  gp3-csi (default)   ebs.csi.aws.com   Delete          WaitForFirstConsumer   true                   20h
   ```
     
 ## Installing OpenShift Data Foundation
@@ -70,7 +71,7 @@ All csvs must reach the phase `Succeeded`. Note that you must wait until the csv
 
 ### Creating ODF instance
 
-Review the [odf-instance/base](odf-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the *ocs-storagecluster-storagecluster.yaml* manifests is appropriate storage class for your infrastructure provider (use `gp2` for AWS, `thin` for vSphere).
+Review the [odf-instance/base](odf-instance/base) kustomization and modify it to suit your needs. Make sure that the `storageClassName` set in the *ocs-storagecluster-storagecluster.yaml* manifests is appropriate storage class for your infrastructure provider (use `gp3-csi` for AWS, `thin` for vSphere).
 
 To deploy an ODF instance on AWS, issue the command:
 
@@ -105,7 +106,7 @@ Congrats on completing the installation of OpenShift Data Foundation!
 Mark the current StorageClass as non-default:
 
 ```
-$ oc patch storageclass gp2 \
+$ oc patch storageclass gp3-csi \
     -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class": "false"}}}'
 ```
 Configure ceph rbd as your default StorageClass:
